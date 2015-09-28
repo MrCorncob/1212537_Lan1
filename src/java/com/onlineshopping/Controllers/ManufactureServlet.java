@@ -8,7 +8,6 @@ package com.onlineshopping.Controllers;
 import com.onlineshopping.Models.ProductService;
 import com.onlineshopping.POJO.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;

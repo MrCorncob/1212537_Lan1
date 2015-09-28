@@ -10,7 +10,6 @@ import com.onlineshopping.Models.OperatingSystemService;
 import com.onlineshopping.POJO.Manufacture;
 import com.onlineshopping.POJO.OperatingSystem;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -6,7 +6,6 @@
 package com.onlineshopping.Models;
 
 import com.onlineshopping.POJO.Product;
-import com.onlineshopping.POJO.User;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;

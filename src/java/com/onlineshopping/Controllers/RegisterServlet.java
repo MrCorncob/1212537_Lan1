@@ -9,7 +9,6 @@ import com.onlineshopping.Models.RegisterService;
 import com.onlineshopping.Models.MD5Utility;
 import com.onlineshopping.POJO.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
