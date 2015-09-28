@@ -36,7 +36,14 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(true);
         User user;
+        user = (User)session.getAttribute("user");
+        if (user != null)
+        {
+            request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        }
+        
         LoginService loginService = new LoginService();
         String username = request.getParameter("username");
         String password = MD5Utility.getMD5Hash(request.getParameter("password"));
@@ -44,14 +51,12 @@ public class LoginServlet extends HttpServlet {
 
         if (user != null)//Đăng nhập thành công
         {
-            HttpSession session = request.getSession(true);
             session.setAttribute("user", user);
             session.setAttribute("loginStatus", "success");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("index.html");
         } else {
-            HttpSession session = request.getSession(true);
             session.setAttribute("loginStatus", "error");
-            response.sendRedirect("login.jsp"); //error page
+            response.sendRedirect("login.html"); //error page
         }
     }
 
@@ -67,7 +72,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        
     }
 
     /**
@@ -81,7 +89,30 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(true);
+        User user;
+        user = (User)session.getAttribute("user");
+        if (user != null)
+        {
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        }
+        
+        LoginService loginService = new LoginService();
+        String username = request.getParameter("username");
+        String password = MD5Utility.getMD5Hash(request.getParameter("password"));
+        user = loginService.takeLogin(username, password);
+
+        if (user != null)//Đăng nhập thành công
+        {
+            session.setAttribute("user", user);
+            session.setAttribute("loginStatus", "success");
+            response.sendRedirect("index.html");
+        } else {
+            session.setAttribute("loginStatus", "error");
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        }
     }
 
     /**
