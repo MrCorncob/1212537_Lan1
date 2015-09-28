@@ -42,7 +42,7 @@
                             <%                
                                     if (message != null) {
                                         out.print("<label>" + message + "</lable></br>");
-                                        session.setAttribute("registerStatus", null);
+                                        session.setAttribute("message", null);
                                     }
                             %>
                             <div style="float:none">

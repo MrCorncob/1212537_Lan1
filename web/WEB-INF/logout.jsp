@@ -4,6 +4,8 @@
     Author     : Corncob
 --%>
 
+<%@page import="com.onlineshopping.POJO.OperatingSystem"%>
+<%@page import="com.onlineshopping.POJO.Manufacture"%>
 <%@page import="com.onlineshopping.POJO.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%

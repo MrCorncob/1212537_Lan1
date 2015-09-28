@@ -20,7 +20,7 @@
                     } else {
                         String _username = user.getFullname();
                         out.print("<a href=\"logout.html\"><li>Đăng Xuất</li></a>");
-                        out.print("<a href=\"usercp.html\"><li>" + _username + "</li></a>");
+                        out.print("<a href=\"#\"><li>" + _username + "</li></a>");
                     }
                 %>
 
@@ -35,9 +35,9 @@
             <a class="toggleMenu" href="#">Menu</a>
             <ul class="nav">
                 <li class="active"><a href="index.html" data-hover="Home">Trang Chủ</a></li>
-                <li><a href="about.html" data-hover="Thông Tin">Thông Tin</a></li>
-                <li><a href="contact.html" data-hover="Liên Hệ">Liên Hệ</a></li>
-                <li><a href="service.html" data-hover="Dịch Vụ">Dịch Vụ</a></li>
+                <li><a href="#" data-hover="Thông Tin">Thông Tin</a></li>
+                <li><a href="#" data-hover="Liên Hệ">Liên Hệ</a></li>
+                <li><a href="#" data-hover="Dịch Vụ">Dịch Vụ</a></li>
                 <li><a href="http://daiyen.info" data-hover="DaiYen.info" target="_blank">DaiYen.info</a></li>
             </ul>
             <script type="text/javascript" src="js/nav.js"></script>

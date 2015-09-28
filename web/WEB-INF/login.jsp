@@ -3,6 +3,8 @@
     Created on : May 10, 2015, 3:11:59 AM
     Author     : Corncob
 --%>
+<%@page import="com.onlineshopping.POJO.OperatingSystem"%>
+<%@page import="com.onlineshopping.POJO.Manufacture"%>
 <%@page import="com.onlineshopping.POJO.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
@@ -59,7 +61,7 @@
                                     String message = (String) session.getAttribute("message");
                                     if (message !=null) {
                                         out.print("<label>" + message + "</label></br>");
-                                        session.setAttribute("message", null);
+                                       
                                     }
                                 %>
                                 <a  href="forgot.html">Quên mật khẩu?</a>

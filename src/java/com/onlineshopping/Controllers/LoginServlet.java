@@ -46,32 +46,7 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(true);
-        session.setAttribute("manufactureList", manufactureList);
-        session.setAttribute("osList", osList);
         
-        User user;
-        user = (User)session.getAttribute("user");
-        if (user != null)
-        {
-            request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-        }
-        
-        LoginService loginService = new LoginService();
-        String username = request.getParameter("username");
-        String password = MD5Utility.getMD5Hash(request.getParameter("password"));
-        user = loginService.takeLogin(username, password);
-
-        if (user != null)//Đăng nhập thành công
-        {
-            session.setAttribute("user", user);
-            response.sendRedirect("index.html");
-        } else {
-            session.setAttribute("message", "Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng");
-            response.sendRedirect("login.html"); //error page
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -125,7 +100,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("loginStatus", "success");
             response.sendRedirect("index.html");
         } else {
-            session.setAttribute("loginStatus", "error");
+            session.setAttribute("message", "Sai tên đăng nhập hoặc mật khẩu!");
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
     }
