@@ -5,8 +5,13 @@
  */
 package com.onlineshopping.Controllers;
 
+import com.onlineshopping.Models.ManufactureService;
+import com.onlineshopping.Models.OperatingSystemService;
+import com.onlineshopping.POJO.Manufacture;
+import com.onlineshopping.POJO.OperatingSystem;
 import com.onlineshopping.POJO.Product;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +24,15 @@ import javax.servlet.http.HttpSession;
  */
 public class ProductSevlet extends HttpServlet {
 
+    private ArrayList<Manufacture> manufactureList;
+    private ArrayList<OperatingSystem> osList;
+    @Override
+    public void init()
+    {
+        manufactureList = (ArrayList<Manufacture>) ManufactureService.getManufactureList();
+        osList = (ArrayList<OperatingSystem>) OperatingSystemService.getOperatingSystemList();
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,6 +47,8 @@ public class ProductSevlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int productId = Integer.parseInt(request.getParameter("id"));
         HttpSession session = request.getSession(true);
+        session.setAttribute("manufactureList", manufactureList);
+        session.setAttribute("osList", osList);
         com.onlineshopping.Models.ProductService productService = new com.onlineshopping.Models.ProductService();
         Product product = new Product();
         product = productService.getProductById(productId);

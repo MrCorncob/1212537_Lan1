@@ -5,11 +5,17 @@
  */
 package com.onlineshopping.Controllers;
 
+import com.onlineshopping.Models.ManufactureService;
+import com.onlineshopping.Models.OperatingSystemService;
+import com.onlineshopping.POJO.Manufacture;
+import com.onlineshopping.POJO.OperatingSystem;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -17,6 +23,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LogoutServlet extends HttpServlet {
 
+    private ArrayList<Manufacture> manufactureList;
+    private ArrayList<OperatingSystem> osList;
+    @Override
+    public void init()
+    {
+        manufactureList = (ArrayList<Manufacture>) ManufactureService.getManufactureList();
+        osList = (ArrayList<OperatingSystem>) OperatingSystemService.getOperatingSystemList();
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,6 +45,9 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(true);
+        session.setAttribute("manufactureList", manufactureList);
+        session.setAttribute("osList", osList);
         request.getRequestDispatcher("/WEB-INF/logout.jsp").forward(request, response);
     }
 

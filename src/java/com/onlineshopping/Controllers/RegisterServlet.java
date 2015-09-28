@@ -7,8 +7,13 @@ package com.onlineshopping.Controllers;
 
 import com.onlineshopping.Models.RegisterService;
 import com.onlineshopping.Models.MD5Utility;
+import com.onlineshopping.Models.ManufactureService;
+import com.onlineshopping.Models.OperatingSystemService;
+import com.onlineshopping.POJO.Manufacture;
+import com.onlineshopping.POJO.OperatingSystem;
 import com.onlineshopping.POJO.User;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +26,14 @@ import javax.servlet.http.HttpSession;
  */
 public class RegisterServlet extends HttpServlet {
 
+    private ArrayList<Manufacture> manufactureList;
+    private ArrayList<OperatingSystem> osList;
+    @Override
+    public void init()
+    {
+        manufactureList = (ArrayList<Manufacture>) ManufactureService.getManufactureList();
+        osList = (ArrayList<OperatingSystem>) OperatingSystemService.getOperatingSystemList();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,6 +62,9 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(true);
+        session.setAttribute("manufactureList", manufactureList);
+        session.setAttribute("osList", osList);
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
@@ -68,6 +84,8 @@ public class RegisterServlet extends HttpServlet {
         String password = MD5Utility.getMD5Hash(request.getParameter("password"));
         User user;
         HttpSession session = request.getSession(true);
+        session.setAttribute("manufactureList", manufactureList);
+        session.setAttribute("osList", osList);
         user = (User)session.getAttribute("user");
         if (user != null)
         {

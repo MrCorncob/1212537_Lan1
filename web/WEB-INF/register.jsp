@@ -3,6 +3,8 @@
     Created on : May 10, 2015, 11:11:45 PM
     Author     : Corncob
 --%>
+<%@page import="com.onlineshopping.POJO.OperatingSystem"%>
+<%@page import="com.onlineshopping.POJO.Manufacture"%>
 <%
     User user = (User) session.getAttribute("user");
     String message = (String) session.getAttribute("message");

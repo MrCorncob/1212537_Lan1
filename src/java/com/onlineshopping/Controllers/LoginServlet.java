@@ -7,8 +7,13 @@ package com.onlineshopping.Controllers;
 
 import com.onlineshopping.Models.LoginService;
 import com.onlineshopping.Models.MD5Utility;
+import com.onlineshopping.Models.ManufactureService;
+import com.onlineshopping.Models.OperatingSystemService;
+import com.onlineshopping.POJO.Manufacture;
+import com.onlineshopping.POJO.OperatingSystem;
 import com.onlineshopping.POJO.User;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +25,16 @@ import javax.servlet.http.HttpSession;
  * @author Corncob
  */
 public class LoginServlet extends HttpServlet {
-
+    
+    private ArrayList<Manufacture> manufactureList;
+    private ArrayList<OperatingSystem> osList;
+    @Override
+    public void init()
+    {
+        manufactureList = (ArrayList<Manufacture>) ManufactureService.getManufactureList();
+        osList = (ArrayList<OperatingSystem>) OperatingSystemService.getOperatingSystemList();
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,6 +49,9 @@ public class LoginServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(true);
+        session.setAttribute("manufactureList", manufactureList);
+        session.setAttribute("osList", osList);
+        
         User user;
         user = (User)session.getAttribute("user");
         if (user != null)

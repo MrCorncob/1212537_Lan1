@@ -5,8 +5,12 @@
  */
 package com.onlineshopping.Controllers;
 
+import com.onlineshopping.Models.ManufactureService;
+import com.onlineshopping.Models.OperatingSystemService;
 import com.onlineshopping.Models.ProductService;
 import com.onlineshopping.Models.SearchProductService;
+import com.onlineshopping.POJO.Manufacture;
+import com.onlineshopping.POJO.OperatingSystem;
 import com.onlineshopping.POJO.Product;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +27,14 @@ import javax.servlet.http.HttpSession;
  */
 public class SearchServlet extends HttpServlet {
 
+    private ArrayList<Manufacture> manufactureList;
+    private ArrayList<OperatingSystem> osList;
+    @Override
+    public void init()
+    {
+        manufactureList = (ArrayList<Manufacture>) ManufactureService.getManufactureList();
+        osList = (ArrayList<OperatingSystem>) OperatingSystemService.getOperatingSystemList();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,6 +55,8 @@ public class SearchServlet extends HttpServlet {
         String color = request.getParameter("color");
         
         HttpSession session = request.getSession(true);
+        session.setAttribute("manufactureList", manufactureList);
+        session.setAttribute("osList", osList);
         SearchProductService searchService = new SearchProductService();
         ProductService productService = new ProductService();
         List<Product> productList = new ArrayList<Product>();

@@ -25,6 +25,12 @@ public class IndexServlet extends HttpServlet {
 
     private ArrayList<Manufacture> manufactureList;
     private ArrayList<OperatingSystem> osList;
+    @Override
+    public void init()
+    {
+        manufactureList = (ArrayList<Manufacture>) ManufactureService.getManufactureList();
+        osList = (ArrayList<OperatingSystem>) OperatingSystemService.getOperatingSystemList();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,13 +47,6 @@ public class IndexServlet extends HttpServlet {
         session.setAttribute("manufactureList", manufactureList);
         session.setAttribute("osList", osList);
         request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-    }
-
-    @Override
-    public void init()
-    {
-        manufactureList = (ArrayList<Manufacture>) ManufactureService.getManufactureList();
-        osList = (ArrayList<OperatingSystem>) OperatingSystemService.getOperatingSystemList();
     }
     
     @Override
