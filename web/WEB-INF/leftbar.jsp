@@ -3,6 +3,9 @@
     Created on : May 10, 2015, 10:55:07 PM
     Author     : Corncob
 --%>
+<%@page import="com.onlineshopping.POJO.OperatingSystem"%>
+<%@page import="com.onlineshopping.POJO.Manufacture"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="col-md-3 sidebar_box">
                         <div class="sidebar">
@@ -11,7 +14,29 @@
                                 <ul class="menu">
                                     <li><a href="#"><img class="arrow-img" src="images/f_menu.png" alt=""/>Hãng Sản Xuất</a>
                                         <ul>
-                                            <li><a href="./category.jsp?id=">Apple</a></li>
+                                            <%
+                                            for (Manufacture manufacture: manufactureList)
+                                            {
+                                                %>
+                                                    <li><a href="./manufacture.html?id=<%=manufacture.getId()%>"><%=manufacture.getName()%></a></li>
+                                                <%
+                                            }
+                                            %>
+                                            
+                                            
+                                        </ul>
+                                    </li>
+                                    <li><a href="#"><img class="arrow-img" src="images/f_menu.png" alt=""/>Hệ Điều Hành</a>
+                                        <ul>
+                                            <%
+                                            for (OperatingSystem os: osList)
+                                            {
+                                                %>
+                                                    <li><a href="./operating-system.html?id=<%=os.getId()%>"><%=os.getName()%></a></li>
+                                                <%
+                                            }
+                                            %>
+                                            
                                             
                                         </ul>
                                     </li>

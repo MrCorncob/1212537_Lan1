@@ -4,25 +4,21 @@
     Author     : Corncob
 --%>
 
+<%@page import="com.onlineshopping.POJO.Product"%>
 <%@page import="java.text.DecimalFormat"%>
-<%@page import="com.onlineshopping.beans.Product"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    int _productId = 1;
-    SQLServerFactory factory = new SQLServerFactory();
+    User user = (User) session.getAttribute("user");
     DecimalFormat formatter = new DecimalFormat("###,###,###.##");
-    try {
-        _productId = Integer.parseInt(request.getParameter("id"));
-    } catch (Exception e) {
-
-    }
-    Product _product = factory.getProductById(_productId);
+    Product product = (Product)session.getAttribute("product");
+    ArrayList<Manufacture> manufactureList = (ArrayList<Manufacture>)session.getAttribute("manufactureList");
+    ArrayList<OperatingSystem> osList = (ArrayList<OperatingSystem>)session.getAttribute("osList");
 
 %>
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title><%=_product.getName()%></title>
+        <title><%=product.getName()%></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
@@ -52,43 +48,42 @@
                             <div class="single_grid">
                                 <div class="grid images_3_of_2">
                                     <ul style="display: block; width: 300px; height: 533px;" class="etalage" id="etalage">
-                                        <li><img style="display: inline; width: 300px; height: 400px; opacity: 1;" class="etalage_thumb_image" src="images/product/<%=_product.getImageUrl()%>">
+                                        <li><img style="display: inline; width: 300px; height: 400px; opacity: 1;" class="etalage_thumb_image" src="images/product/<%=product.getId()%>.png">
 
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>		
                                 </div> 
                                 <div class="desc1 span_3_of_2">
-                                    <h1><%=_product.getName()%></h1>
+                                    <h1><%=product.getName()%></h1>
                                     <p class="availability"><span class="color">Còn hàng</span></p>
                                     <div class="price_single">
-                                        <span class="actual"><%=formatter.format(_product.getPrice()) + " VNĐ"%></span>
+                                        <span class="actual"><%=formatter.format(product.getPrice()) + " VNĐ"%></span>
                                     </div>
-                                    <h2 class="quick">Mô Tả:</h2>
-                                    <p class="quick_desc"><%=_product.getDescription()%></p>
                                     <span class="color">
-                                        <label>Màu sắc: </label>
-                                        <%=_product.getColor()%>
+                                        <label>Kích Thước Màn Hình: </label>
+                                        <%=product.getScreensize()%>"
                                     </span>
                                     <div class="clearfix"></div>
                                     <div>
-                                        <label>Size:</label>
+                                        <label>Màu sắc:</label>
                                         <ul class="form-inline size">
                                             <%
-                                                String[] _sizes = _product.getSize().split(", ");
-                                                for (String _size : _sizes) {
-                                                    out.print("<li class=\"radio\"><label><input name=\"size\"  type=\"radio\">" + _size +"</label></li>");
+                                                String[] _colors = product.getColor().split(", ");
+                                                for (String _color : _colors) {
+                                                    out.print("<li class=\"radio\"><label><input name=\"size\"  type=\"radio\">" + _color +"</label></li>");
                                                 }
                                             %>
                                         </ul>
                                     </div>
-                                        
+                                    <h2 class="quick">Mô Tả:</h2>
+                                    <p class="quick_desc"><%=product.getDescription()%></p>    
 
 
                                     
                                     
-                                    <form action="addtocart" method="post">
-                                        <input name="id" type="hidden" value="<%=_productId%>">
+                                    <form>
+                                        <input name="id" type="hidden" value="<%=product.getId()%>">
                                     <div class="quantity_box">
                                         <ul class="product-qty">
                                             
@@ -105,7 +100,7 @@
                                         </ul>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <button  class="btn btn-primary btn-lg" value="submit">Thêm Vào Giỏ Hàng</button>
+                                    <a  class="btn btn-primary btn-lg" value="submit">Thêm Vào Giỏ Hàng</a>
                                     </form>
                                 </div>
                                 <div class="clearfix"> </div>

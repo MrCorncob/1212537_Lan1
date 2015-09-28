@@ -5,6 +5,7 @@
  */
 package com.onlineshopping.POJO;
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,11 +17,12 @@ import javax.persistence.Table;
  * @author Corncob
  */
 @Entity
-@Table(name="Operating_System")
+@Table(name="OperatingSystem")
 public class OperatingSystem implements Serializable {
     
     @Id @GeneratedValue
     private Long id;
+    @Column(name="name")
     private String name;
 
     /**

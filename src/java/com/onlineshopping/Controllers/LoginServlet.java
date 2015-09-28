@@ -52,10 +52,9 @@ public class LoginServlet extends HttpServlet {
         if (user != null)//Đăng nhập thành công
         {
             session.setAttribute("user", user);
-            session.setAttribute("loginStatus", "success");
             response.sendRedirect("index.html");
         } else {
-            session.setAttribute("loginStatus", "error");
+            session.setAttribute("message", "Tên Đăng Nhập Hoặc Mật Khẩu Không Đúng");
             response.sendRedirect("login.html"); //error page
         }
     }
@@ -97,6 +96,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null)
         {
             request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
         }
         
         LoginService loginService = new LoginService();

@@ -5,8 +5,7 @@
  */
 package com.onlineshopping.Models;
 
-import com.onlineshopping.POJO.Manufacture;
-import com.onlineshopping.POJO.User;
+import com.onlineshopping.POJO.OperatingSystem;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
@@ -17,18 +16,17 @@ import org.hibernate.Transaction;
  *
  * @author Corncob
  */
-public class ManufactureService {
-    
-    public static List<Manufacture> getManufactureList()
+public class OperatingSystemService {
+    public static List<OperatingSystem> getOperatingSystemList()
     {
-        List<Manufacture> list = new ArrayList<Manufacture>();
+        List<OperatingSystem> list = new ArrayList<>();
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.getCurrentSession();
         Transaction tx = null;
         try {
             tx = session.getTransaction();
             tx.begin();
-            list = session.createQuery("from Manufacture").list();
+            list = session.createQuery("from OperatingSystem").list();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {

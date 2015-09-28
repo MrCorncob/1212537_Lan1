@@ -14,13 +14,11 @@
             </div>
             <ul class="shopping_grid">
                 <%
-                    String _loginStatus = (String) session.getAttribute("loginStatus");
-                    if (_loginStatus == null || _loginStatus != "success") {
+                    if (user == null) {
                         out.print("<a href=\"register.html\"><li>Đăng Kí</li></a>");
                         out.print("<a href=\"login.html\"><li>Đăng Nhập</li></a>");
                     } else {
-                        User _user = (User) (session.getAttribute("user"));
-                        String _username = _user.getFullname();
+                        String _username = user.getFullname();
                         out.print("<a href=\"logout.html\"><li>Đăng Xuất</li></a>");
                         out.print("<a href=\"usercp.html\"><li>" + _username + "</li></a>");
                     }
@@ -50,53 +48,78 @@
     <div class="container">
         <div class="search">
             <div class="stay">Tìm Kiếm Sản Phẩm Theo</div>
+            <br>
             <div >
                 <form class="form-inline" action="search.html" method="get">
                     <span>
                         <label>
-                            Màu Sắc
+                            Hãng
+                        </label>
+                        <select class="form-control" name="manufacture">
+                            <option value="-1">Bất Kì</option>
+                            <%
+                                for (Manufacture _manufacture: manufactureList)
+                                {        
+                                %>
+                                <option value="<%=_manufacture.getId()%>"><%=_manufacture.getName()%></option>
+                                <%
+                                }
+                            %>
+                        </select>
+                    </span>
+                        <span>
+                        <label>
+                            OS
+                        </label>
+                        <select class="form-control" name="os">
+                            <option value="-1">Bất Kì</option>
+                            <%
+                                for (OperatingSystem _os: osList)
+                                {        
+                                %>
+                                <option value="<%=_os.getId()%>"><%=_os.getName()%></option>
+                                <%
+                                }
+                            %>
+                        </select>
+                    </span>
+                    <span>
+                        <label>
+                            Màu
                         </label>
                         <select class="form-control" name="color">
                             <option value="">Bất Kì</option>
                             <option>Đỏ</option>
-                            <option>Cam</option>
                             <option>Vàng</option>
-                            <option>Lục</option>
-                            <option>Lam</option>
-                            <option>Chàm</option>
+                            <option>Đen</option>
+                            <option>Trắng</option>
+                            <option>Gray</option>
+                            <option>Xám</option>
                         </select>
                     </span>
                     <span>
                         <label>
-                            Kích Thước
+                            Màn Hình
                         </label>
-                        <select class="form-control" name="size">
-                            <option value="">Bất Kì</option>
-                            <option>S</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
+                        <select class="form-control" name="screensize">
+                            <option value="-1">Bất Kì</option>
+                            <option value="4">&lt;4"</option>
+                            <option value="5">4" - 5"</option>
+                            <option value="6">5" - 6"</option>
+                            <option value="7">&gt;6"</option>
                         </select>
                     </span>
                     <span>
                         <label>
-                            Giá Bán
+                            Giá
                         </label>
                         <select class="form-control" name="price">
-                            <option value="">Bất Kì</option>
-                            <option>&lt;100.000</option>
-                            <option>100.000 - 200.000</option>
-                            <option>200.000 - 300.000</option>
-                            <option>&gt;300.000</option>
-                        </select>
-                    </span>
-                    <span>
-                        <label>
-                            Nhà Cung Cấp
-                        </label>
-                        <select class="form-control" name="manufacture">
-                            <option value="">Bất Kì</option>
-                            <option>Ma Bư</option>
+                            <option value="-1">Bất Kì</option>
+                            <option value="3">&lt;3 Triệu</option>
+                            <option value="5">Từ 3-5 Triệu</option>
+                            <option value="10">Từ 5-10 Triệu</option>
+                            <option value="20">Từ 10-20 Triệu</option>
+                            <option value="100">&gt; 20 Triệu</option>
                         </select>
                     </span>
                     <input type="submit" value=""> 

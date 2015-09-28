@@ -12,6 +12,26 @@
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>com.onlineshopping.Controllers.IndexServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.onlineshopping.Controllers.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManufactureServlet</servlet-name>
+        <servlet-class>com.onlineshopping.Controllers.ManufactureServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OperatingSystemServlet</servlet-name>
+        <servlet-class>com.onlineshopping.Controllers.OperatingSystemServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductService</servlet-name>
+        <servlet-class>com.onlineshopping.Controllers.ProductSevlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>com.onlineshopping.Controllers.SearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index.html</url-pattern>
@@ -23,6 +43,26 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManufactureServlet</servlet-name>
+        <url-pattern>/manufacture.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OperatingSystemServlet</servlet-name>
+        <url-pattern>/operating-system.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductService</servlet-name>
+        <url-pattern>/product.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search.html</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

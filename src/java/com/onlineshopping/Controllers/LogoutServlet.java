@@ -5,27 +5,19 @@
  */
 package com.onlineshopping.Controllers;
 
-import com.onlineshopping.Models.ManufactureService;
-import com.onlineshopping.Models.OperatingSystemService;
-import com.onlineshopping.POJO.Manufacture;
-import com.onlineshopping.POJO.OperatingSystem;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Corncob
  */
-public class IndexServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
-    private ArrayList<Manufacture> manufactureList;
-    private ArrayList<OperatingSystem> osList;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,20 +29,20 @@ public class IndexServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(true);
-        session.setAttribute("manufactureList", manufactureList);
-        session.setAttribute("osList", osList);
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/logout.jsp").forward(request, response);
     }
 
-    @Override
-    public void init()
-    {
-        manufactureList = (ArrayList<Manufacture>) ManufactureService.getManufactureList();
-        osList = (ArrayList<OperatingSystem>) OperatingSystemService.getOperatingSystemList();
-    }
-    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

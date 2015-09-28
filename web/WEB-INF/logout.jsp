@@ -6,6 +6,11 @@
 
 <%@page import="com.onlineshopping.POJO.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    User user = (User) session.getAttribute("user");
+    ArrayList<Manufacture> manufactureList = (ArrayList<Manufacture>)session.getAttribute("manufactureList");
+    ArrayList<OperatingSystem> osList = (ArrayList<OperatingSystem>)session.getAttribute("osList");
+%>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -28,8 +33,8 @@
         <div class="main">
             <div class="about">
                 <div class="container">
-                    <%                        User currentUser = (User) session.getAttribute("user");
-                        if (currentUser == null) {
+                    <%  
+                    if (user == null) {
                     %>
                     <h1>Bạn chưa đăng nhập!</h1>
 
@@ -41,7 +46,7 @@
                     <p>Bạn sẽ được chuyển về trang chủ sau 3s nữa</p>
                     <script>
             window.setTimeout(function () {
-                window.location.href = "index.jsp";
+                window.location.href = "index.html";
             }, 3000);
                     </script>
                     <%

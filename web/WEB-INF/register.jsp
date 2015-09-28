@@ -3,7 +3,12 @@
     Created on : May 10, 2015, 11:11:45 PM
     Author     : Corncob
 --%>
-
+<%
+    User user = (User) session.getAttribute("user");
+    String message = (String) session.getAttribute("message");
+    ArrayList<Manufacture> manufactureList = (ArrayList<Manufacture>)session.getAttribute("manufactureList");
+    ArrayList<OperatingSystem> osList = (ArrayList<OperatingSystem>)session.getAttribute("osList");
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
@@ -29,16 +34,15 @@
         <div class="about">
             <div class="container">
                 <div class="register">
-                    <form action="register" method="post"> 
+                    <form action="register.html" method="post"> 
                         <div class="register-bottom-grid">
                             <h3>THÔNG TIN ĐĂNG NHẬP</h3>
                             <%                
-                                    String registerStatus = (String) session.getAttribute("registerStatus");
-                                    if (registerStatus == "error") {
-                                        out.print("<label>Thông tin không hợp lệ!</lable></br>");
-                                        session.setAttribute("registerStatus", "none");
+                                    if (message != null) {
+                                        out.print("<label>" + message + "</lable></br>");
+                                        session.setAttribute("registerStatus", null);
                                     }
-                                %>
+                            %>
                             <div style="float:none">
                                 <span>Tên đăng nhập<label>*</label></span>
                                 <input required class="form-control" type="text" name="username">
@@ -60,11 +64,11 @@
                             <h3>THÔNG TIN CÁ NHÂN</h3>
                             <div>
                                 <span>Họ<label>*</label></span>
-                                <input class="form-control" type="text" name="firstname"> 
+                                <input  required class="form-control" type="text" name="firstname"> 
                             </div>
                             <div>
                                 <span>Tên<label>*</label></span>
-                                <input class="form-control" type="text" name="lastname"> 
+                                <input required class="form-control" type="text" name="lastname"> 
                             </div>
                             <div>
                                 <span>Giới tính<label>*</label></span>
@@ -73,19 +77,19 @@
                             </div>
                             <div>
                                 <span>Ngày sinh<label>*</label></span>
-                                <input class="form-control" type="text" name="birthday" placeholder="yyyy-mm-dd"> 
+                                <input required class="form-control" type="text" name="birthday" placeholder="yyyy-mm-dd"> 
                             </div>
                             <div>
                                 <span>Địa chỉ email<label>*</label></span>
-                                <input class="form-control" type="email" name="email"> 
+                                <input required class="form-control" type="email" name="email"> 
                             </div>
                             <div>
                                 <span>Số điện thoại<label>*</label></span>
-                                <input class="form-control" type="text" name="phone"> 
+                                <input required class="form-control" type="text" name="phone"> 
                             </div>
                             <div>
                                 <span>Địa chỉ<label>*</label></span>
-                                <input class="form-control" type="text" name="address"> 
+                                <input required class="form-control" type="text" name="address"> 
                             </div>
                             <div class="clearfix"> </div>
 

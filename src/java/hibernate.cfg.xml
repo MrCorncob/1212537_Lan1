@@ -8,6 +8,10 @@
     <property name="hibernate.connection.username">1212537</property>
     <property name="hibernate.connection.password">1212537</property>
     <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.transaction.auto_close_session">true</property>
     <mapping class="com.onlineshopping.POJO.User"/>
+    <mapping class="com.onlineshopping.POJO.Manufacture"/>
+    <mapping class="com.onlineshopping.POJO.Product"/>
+    <mapping class="com.onlineshopping.POJO.OperatingSystem"/>
   </session-factory>
 </hibernate-configuration>

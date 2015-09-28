@@ -5,6 +5,11 @@
 --%>
 <%@page import="com.onlineshopping.POJO.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    User user = (User) session.getAttribute("user");
+    ArrayList<Manufacture> manufactureList = (ArrayList<Manufacture>)session.getAttribute("manufactureList");
+    ArrayList<OperatingSystem> osList = (ArrayList<OperatingSystem>)session.getAttribute("osList");
+%>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -29,14 +34,14 @@
             <div class="about">
                 <div class="container">
                     <%  
-                    User currentUser = (User) session.getAttribute("user");
-                        if (currentUser == null) {
+                    
+                        if (user == null) {
                     %>
                     <div class="register">
                         <div class="col-md-6 login-left">
                             <h3>KHÁCH HÀNG MỚI?</h3>
                             <p>Hãy nhanh tay đăng kí tài khoản mới, bạn sẽ có thể thanh toán dễ dàng hơn, lưu trữ thông tin/địa chỉ thanh toán, kiểm tra đơn hàng và hơn thế nữa. </p>
-                            <a class="acount-btn" href="register.jsp">Đăng Kí</a>
+                            <a class="acount-btn" href="register.html">Đăng Kí</a>
                         </div>
                         <div class="col-md-6 login-right">
                             <h3>KHÁCH HÀNG ĐÃ ĐĂNG KÍ</h3>
@@ -51,13 +56,13 @@
                                     <input type="password" name="password" > 
                                 </div>
                                 <%                
-                                    String loginStatus = (String) session.getAttribute("loginStatus");
-                                    if (loginStatus == "error") {
-                                        out.print("<label>Lỗi!Sai tên đăng nhập hoặc mật khẩu!</lable></br>");
-                                        session.setAttribute("loginStatus", "none");
+                                    String message = (String) session.getAttribute("message");
+                                    if (message !=null) {
+                                        out.print("<label>" + message + "</label></br>");
+                                        session.setAttribute("message", null);
                                     }
                                 %>
-                                <a  href="forgot.jsp">Quên mật khẩu?</a>
+                                <a  href="forgot.html">Quên mật khẩu?</a>
                                 <input type="submit" value="Đăng Nhập">
                                 
                             </form>

@@ -33,10 +33,52 @@ public class RegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String password = MD5Utility.getMD5Hash(request.getParameter("password"));
-        User user = new User();
+        User user;
+        HttpSession session = request.getSession(true);
+        user = (User)session.getAttribute("user");
+        if (user != null)
+        {
+            response.sendRedirect("index.html");
+        }
+        else
+        {
+            user = new User();
+        }
+        
         RegisterService registerService = new RegisterService();
         user.setAddress(request.getParameter("address"));
         user.setBirthDay(request.getParameter("birthday"));
@@ -54,43 +96,12 @@ public class RegisterServlet extends HttpServlet {
 
         if (result == true)//Đăng kí thành công
         {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("registerStatus", "success");
-            response.sendRedirect("login.jsp");
+            session.setAttribute("message", "Đăng Kí Thành Công, Vui Lòng Đăng Nhập");
+            response.sendRedirect("login.html");
         } else {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("registerStatus", "error");
-            response.sendRedirect("register.jsp"); //error page 
+            session.setAttribute("message", "Lỗi! Tên Đăng Nhập Hoặc Email Đã Được Sử Dụng");
+            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
         }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
